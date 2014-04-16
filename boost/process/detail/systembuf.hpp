@@ -125,7 +125,7 @@ protected:
         ok = (cnt != -1 && cnt != 0); 
 #elif defined(BOOST_WINDOWS_API) 
         DWORD cnt; 
-        BOOL res = ::ReadFile(handle_, read_buf_.get(), bufsize_, &cnt, NULL); 
+        BOOL res = ::ReadFile(handle_, read_buf_.get(), DWORD(bufsize_), &cnt, NULL); 
         ok = (res && cnt > 0); 
 #endif 
 
@@ -185,7 +185,7 @@ protected:
 #if defined(BOOST_POSIX_API) 
         ssize_t cnt = pptr() - pbase(); 
 #elif defined(BOOST_WINDOWS_API) 
-        long cnt = pptr() - pbase(); 
+        long cnt = long(pptr() - pbase()); 
 #endif 
 
         bool ok; 
